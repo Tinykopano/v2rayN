@@ -132,7 +132,6 @@ namespace v2rayN.Handler
                 config.tunModeItem = new TunModeItem
                 {
                     enableTun = false,
-                    showWindow = true,
                     mtu = 9000,
                 };
             }
@@ -859,10 +858,18 @@ namespace v2rayN.Handler
                 profileItem.network = Global.DefaultNetwork;
             }
 
+            var maxSort = -1;
             if (Utils.IsNullOrEmpty(profileItem.indexId))
             {
                 profileItem.indexId = Utils.GetGUID(false);
-                var maxSort = ProfileExHandler.Instance.GetMaxSort();
+                maxSort = ProfileExHandler.Instance.GetMaxSort();
+            }
+            if (!toFile && maxSort < 0)
+            {
+                maxSort = ProfileExHandler.Instance.GetMaxSort();
+            }
+            if (maxSort > 0)
+            {
                 ProfileExHandler.Instance.SetSort(profileItem.indexId, maxSort + 1);
             }
 

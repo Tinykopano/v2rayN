@@ -22,6 +22,13 @@
     {
         public List<Server4Sbox> servers { get; set; }
         public List<Rule4Sbox> rules { get; set; }
+        public string? final { get; set; }
+        public string? strategy { get; set; }
+        public bool? disable_cache { get; set; }
+        public bool? disable_expire { get; set; }
+        public bool? independent_cache { get; set; }
+        public bool? reverse_mapping { get; set; }
+        public Fakeip4Sbox? fakeip { get; set; }
     }
 
     public class Route4Sbox
@@ -148,10 +155,17 @@
         public string type { get; set; }
         public List<string>? host { get; set; }
         public string? path { get; set; }
+        public Headers4Sbox? headers { get; set; }
+
         public string service_name { get; set; }
         public string idle_timeout { get; set; }
         public string ping_timeout { get; set; }
         public bool? permit_without_stream { get; set; }
+    }
+
+    public class Headers4Sbox
+    {
+        public string? Host { get; set; }
     }
 
     public class Server4Sbox
@@ -166,6 +180,7 @@
     public class Experimental4Sbox
     {
         public V2ray_Api4Sbox v2ray_api { get; set; }
+        public Clash_Api4Sbox clash_api { get; set; }
     }
 
     public class V2ray_Api4Sbox
@@ -174,11 +189,24 @@
         public Stats4Sbox stats { get; set; }
     }
 
+    public class Clash_Api4Sbox
+    {
+        public string external_controller { get; set; }
+        public bool store_selected { get; set; }
+    }
+
     public class Stats4Sbox
     {
         public bool enabled { get; set; }
         public List<string>? inbounds { get; set; }
         public List<string>? outbounds { get; set; }
         public List<string>? users { get; set; }
+    }
+
+    public class Fakeip4Sbox
+    {
+        public bool enabled { get; set; }
+        public string inet4_range { get; set; }
+        public string inet6_range { get; set; }
     }
 }
